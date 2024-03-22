@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPLaba2", "OOPLaba2\OOPLaba2.csproj", "{D917CA92-708A-4B4C-8177-40AD65AFCB73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{D917CA92-708A-4B4C-8177-40AD65AFCB73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerOne", "ServerOne\ServerOne.csproj", "{095C8441-ED76-464E-909C-B63458BC3A82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstServer", "FirstServer\FirstServer.csproj", "{095C8441-ED76-464E-909C-B63458BC3A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondServer", "SecondServer\SecondServer.csproj", "{C29176B9-2B1A-439C-A0DD-FE2358D24955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{095C8441-ED76-464E-909C-B63458BC3A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{095C8441-ED76-464E-909C-B63458BC3A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{095C8441-ED76-464E-909C-B63458BC3A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29176B9-2B1A-439C-A0DD-FE2358D24955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29176B9-2B1A-439C-A0DD-FE2358D24955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29176B9-2B1A-439C-A0DD-FE2358D24955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29176B9-2B1A-439C-A0DD-FE2358D24955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
