@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace FirstServer;
+namespace SecondServer;
 
 class Program
 {
@@ -9,11 +9,11 @@ class Program
     {
         var ipAddress = (await Dns.GetHostEntryAsync("localhost")).AddressList[0];
         
-        var endPoint = new IPEndPoint(ipAddress, 80);
+        var endPoint = new IPEndPoint(ipAddress, 90);
         
         var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         
-        var server = new FirstServer(ipAddress, endPoint, socket);
+        var server = new SecondServer(ipAddress, endPoint, socket);
         await server.BindListenerAsync();
         await server.ListenAsync();
     }

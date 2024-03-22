@@ -1,4 +1,4 @@
-namespace FirstServer;
+namespace SecondServer;
 
 public interface IServer
 {

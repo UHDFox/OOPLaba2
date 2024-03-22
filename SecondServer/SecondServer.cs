@@ -2,9 +2,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace FirstServer;
+namespace SecondServer;
 
-public sealed class FirstServer : IServer
+public sealed class SecondServer : IServer
 {
     public IPAddress IpAddress { get; private set; } 
     
@@ -12,7 +12,7 @@ public sealed class FirstServer : IServer
     
     public Socket Listener { get; private set; }
     
-    public FirstServer(IPAddress ipAddress, IPEndPoint ipEndPoint, Socket listener)
+    public SecondServer(IPAddress ipAddress, IPEndPoint ipEndPoint, Socket listener)
     {
         IpAddress = ipAddress;
         IpEndPoint = ipEndPoint;
@@ -20,6 +20,7 @@ public sealed class FirstServer : IServer
     }
     public async Task BindListenerAsync() //method that binds server to some local point
     {
+        
         Listener.Bind(IpEndPoint);
         Console.WriteLine("Server's up");
     }
@@ -28,7 +29,7 @@ public sealed class FirstServer : IServer
     {
         Listener.Listen(); 
         Console.WriteLine("now i'm listening");
-
+        
         while(true)
         {
             var handler = await Listener.AcceptAsync(); // create new socket to handle incoming connection
@@ -38,7 +39,6 @@ public sealed class FirstServer : IServer
             Console.WriteLine($"Server one have received a message!");
             PrintMessage(message);
         }
-       
     }
 
     public void PrintMessage(string message)
