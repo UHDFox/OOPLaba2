@@ -20,9 +20,6 @@ public sealed class Client : IClient
     
     public async Task Connect(int port)
     {
-       /* IpAddress = Dns.GetHostEntry("localhost").AddressList[0];
-        EndPoint = new IPEndPoint(IpAddress, port);
-        Console.WriteLine("endpoint created");*/
        EndPoint = new IPEndPoint(IpAddress, port);
        Sender  = new Socket(IpAddress.AddressFamily,
            SocketType.Stream, ProtocolType.Tcp);
