@@ -1,0 +1,20 @@
+﻿using System.Net;
+using System.Net.Sockets;
+
+namespace FirstServer;
+
+class Program
+{
+    static async Task Main()
+    {
+        var ipAddress = (await Dns.GetHostEntryAsync("localhost")).AddressList[0];
+        
+        var endPoint = new IPEndPoint(ipAddress, 80);
+        
+        var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+        
+        var server = new FirstServer(ipAddress, endPoint, socket);
+        await server.BindListenerAsync();
+        await server.ListenAsync();
+    }
+}
