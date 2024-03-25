@@ -8,9 +8,9 @@ public sealed class FirstServer : IServer
 {
     public IPAddress IpAddress { get; private set; } 
     
-    public IPEndPoint IpEndPoint { get; private set; }
+    private IPEndPoint IpEndPoint { get; set; }
     
-    public Socket Listener { get; private set; }
+    private Socket Listener {  get; set; }
     
     public FirstServer(IPAddress ipAddress, IPEndPoint ipEndPoint, Socket listener)
     {
@@ -18,7 +18,7 @@ public sealed class FirstServer : IServer
         IpEndPoint = ipEndPoint;
         Listener = listener;
     }
-    public async Task BindListenerAsync() //method that binds server to some local point
+    public void BindListener() //method that binds server to some local point
     {
         Listener.Bind(IpEndPoint);
         Console.WriteLine("Server's up");
@@ -33,22 +33,29 @@ public sealed class FirstServer : IServer
         {
             var handler = await Listener.AcceptAsync(); // create new socket to handle incoming connection
             var buffer = new byte[1024]; //buffer array. we'll put received message in there
-            var receivedMessage = await handler.ReceiveAsync(buffer);//we receive message as byte array
-            string message = Encoding.UTF8.GetString(buffer,0, receivedMessage); //decode received message  
-            Console.WriteLine($"Server one have received a message!");
-            PrintMessage(message);
+            var builder = new StringBuilder();
+            int count;
+            do
+            {
+                count = await handler.ReceiveAsync(buffer);
+                string message = Encoding.UTF8.GetString(buffer, 0, count); //decode received message 
+                builder.Append("\n" + message);
+            } while (count > 0);
+            {
+                PrintMessage(builder.ToString());
+            }
         }
-       
     }
 
     public void PrintMessage(string message)
     {
+        Console.WriteLine($"Server one have received a message!");
         Console.WriteLine($"Received message: {message}");
     }
 
     public void CloseConnection()
     {
-        Listener.Close();
+        Listener.Dispose();
         Console.WriteLine("Socket closed");
     }
 }
