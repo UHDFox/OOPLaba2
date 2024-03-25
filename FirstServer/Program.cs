@@ -10,11 +10,12 @@ class Program
         var ipAddress = (await Dns.GetHostEntryAsync("localhost")).AddressList[0];
         
         var endPoint = new IPEndPoint(ipAddress, 80);
-        
+
         var socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-        
         var server = new FirstServer(ipAddress, endPoint, socket);
-        await server.BindListenerAsync();
+        
+        server.BindListener();
         await server.ListenAsync();
+        server.CloseConnection();
     }
 }

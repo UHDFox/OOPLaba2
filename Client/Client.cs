@@ -6,26 +6,26 @@ namespace Client;
 
 public sealed class Client : IClient
 {
-    public IPAddress IpAddress { get; private set; } 
+    public IPAddress IpAddress { get; set; } 
     
-    public IPEndPoint? EndPoint { get; private set; }
+    public IPEndPoint EndPoint { get; set; }
     
-    public Socket? Sender { get; private set; }
+    public Socket Sender { get; set; }
     
     
-    public Client(IPAddress ipAddress)
+    public Client(IPAddress ipAddress,int port)
     {
         IpAddress = ipAddress;
+        EndPoint = new IPEndPoint(ipAddress, port);
+        Sender = new Socket(EndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
     }
+    
     
     public async Task Connect(int port)
     {
-       /* IpAddress = Dns.GetHostEntry("localhost").AddressList[0];
+        IpAddress = Dns.GetHostEntry("localhost").AddressList[0];
         EndPoint = new IPEndPoint(IpAddress, port);
-        Console.WriteLine("endpoint created");*/
-       EndPoint = new IPEndPoint(IpAddress, port);
-       Sender  = new Socket(IpAddress.AddressFamily,
-           SocketType.Stream, ProtocolType.Tcp);
+        Sender = new Socket(EndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         try
         {
             await Sender.ConnectAsync(EndPoint);
@@ -42,7 +42,7 @@ public sealed class Client : IClient
     {
         try
         {
-            Console.WriteLine($"has successfully connected to {Sender.RemoteEndPoint}");
+            Console.WriteLine($"has successfully sent message to {Sender.RemoteEndPoint}");
 
             byte[] encodedMessage = Encoding.ASCII.GetBytes(message);
             await Sender.SendAsync(encodedMessage);
@@ -55,7 +55,7 @@ public sealed class Client : IClient
 
     public void CloseConnection()
     {
-        Sender.Close();
+        Sender.Dispose();
         Console.WriteLine("Client connection closed");
     }
 }
