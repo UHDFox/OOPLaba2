@@ -2,7 +2,7 @@ namespace FirstServer;
 
 public interface IServer
 {
-    public Task BindListenerAsync();
+    public void BindListener();
 
     public Task ListenAsync();
 
