@@ -39,11 +39,15 @@ public sealed class FirstServer : IServer
             {
                 count = await handler.ReceiveAsync(buffer);
                 string message = Encoding.UTF8.GetString(buffer, 0, count); //decode received message 
-                builder.Append("\n" + message);
-            } while (count > 0);
+                buffer = new byte[1024];
+                builder.Append("\n" + (message));
+            } 
+            
+            while (count > 0);
             {
                 PrintMessage(builder.ToString());
             }
+            
         }
     }
 

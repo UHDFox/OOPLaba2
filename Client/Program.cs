@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using System.Net.Sockets;
+
 
 namespace Client;
 
@@ -15,6 +15,7 @@ class Program
         await client.Connect(80);
         await client.SendDataAsync("capybaraluv"); 
         await client.SendDataAsync("orange");
+        await client.SendDataAsync("juice");
         client.CloseConnection();
 
 
@@ -22,6 +23,8 @@ class Program
         await client.Connect(90);
         await client.SendDataAsync("muavyshka"); 
         await client.SendDataAsync("bambuuu"); 
+        await client.SendDataAsync("cuddles"); 
+        await client.SendDataAsync("melons"); 
         client.CloseConnection();
 
     }

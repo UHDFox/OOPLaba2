@@ -37,11 +37,13 @@ public sealed class SecondServer : IServer
             int count;
             do
             {
-                
                 count = await handler.ReceiveAsync(buffer);
                 string message = Encoding.UTF8.GetString(buffer, 0, count); //decode received message 
+                buffer = new byte[1024];
                 builder.Append("\n" + message);
-            } while (count > 0);
+            } 
+            
+            while (count > 0);
             {
                 PrintMessage(builder.ToString());
             }

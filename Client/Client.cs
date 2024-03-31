@@ -20,7 +20,6 @@ public sealed class Client : IClient
         Sender = new Socket(EndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
     }
     
-    
     public async Task Connect(int port)
     {
         IpAddress = Dns.GetHostEntry("localhost").AddressList[0];
