@@ -43,7 +43,7 @@ public sealed class Client : IClient
         {
             Console.WriteLine($"has successfully sent message to {Sender.RemoteEndPoint}");
 
-            byte[] encodedMessage = Encoding.ASCII.GetBytes(message);
+            byte[] encodedMessage = Encoding.ASCII.GetBytes(message + "\n");
             await Sender.SendAsync(encodedMessage);
         }
         catch (Exception e)

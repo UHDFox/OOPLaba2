@@ -31,21 +31,21 @@ public sealed class FirstServer : IServer
 
         while(true)
         {
-            var handler = await Listener.AcceptAsync(); // create new socket to handle incoming connection
+            var handler = await Listener.AcceptAsync(); // create new socket to obrabotat incoming connection
             var buffer = new byte[1024]; //buffer array. we'll put received message in there
-            var builder = new StringBuilder();
+            var receivedMessage = new StringBuilder();
             int count;
             do
             {
                 count = await handler.ReceiveAsync(buffer);
                 string message = Encoding.UTF8.GetString(buffer, 0, count); //decode received message 
                 buffer = new byte[1024];
-                builder.Append("\n" + (message));
+                receivedMessage.Append("\n" + (message));
             } 
             
             while (count > 0);
             {
-                PrintMessage(builder.ToString());
+                PrintMessage(receivedMessage.ToString());
             }
             
         }
